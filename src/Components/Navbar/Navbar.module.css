@@ -25,8 +25,9 @@ img#thunderstorm {
 
 img#sunny,
 img#rainy,
-/* img#thunderstorm, */
-img#cloudy {
+img#thunderstorm,
+img#smoky,
+img#cloudys {
   opacity: 0;
 }
 

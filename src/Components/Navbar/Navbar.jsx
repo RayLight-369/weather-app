@@ -1,11 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Styles from "./Navbar.module.css";
+
 
 const Navbar = () => {
 
-  const [ query, setQuery ] = useState( "Lahore" );
+  const [ query, setQuery ] = useState( "" );
   const [ list, setDataList ] = useState( [] );
+  const [ weatherData, setData ] = useState( {} );
+  const navigate = useNavigate();
+
+  useEffect( () => {
+    const getCurrentLocation = () => {
+      if ( navigator.geolocation ) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords;
+            navigate( `?lat=${ latitude }&lon=${ longitude }` );
+          },
+          error => {
+            console.error( 'Error getting geolocation:', error );
+          }
+        );
+      } else {
+        console.error( 'Geolocation is not supported by this browser.' );
+      }
+    };
+
+    if ( !query.trim().length ) {
+      getCurrentLocation();
+    }
+  }, [] );
+
+
 
   useEffect( () => {
     const locationList = async () => {
@@ -39,31 +66,38 @@ const Navbar = () => {
     console.log( list );
   }, [ list ] );
 
-  const fetchWeatherData = async ( lat, lon ) => {
-    try {
+  // const fetchWeatherData = async ( lat, lon ) => {
+  //   try {
 
-      // const response = await fetch( `https://api.openweathermap.org/data/2.5/weather?lat=${ lat }&lon=${ lon }&units=metric&appid=02c7a3ac20ea610f6b85ded7b170c7b3` );
-      // const data = await response.json();
+  //     // const response = await fetch( `https://api.openweathermap.org/data/2.5/weather?lat=${ lat }&lon=${ lon }&units=metric&appid=02c7a3ac20ea610f6b85ded7b170c7b3` );
+  //     // const data = await response.json();
 
-      // const response2 = await fetch( `https://api.openweathermap.org/data/2.5/forecast?lat=${ lat }&lon=${ lon }&units=metric&appid=02c7a3ac20ea610f6b85ded7b170c7b3` );
-      // const data2 = await response2.json();
+  //     // const response2 = await fetch( `https://api.openweathermap.org/data/2.5/forecast?lat=${ lat }&lon=${ lon }&units=metric&appid=02c7a3ac20ea610f6b85ded7b170c7b3` );
+  //     // const data2 = await response2.json();
 
-      // console.log( data, data2 );
+  //     // console.log( data, data2 );
 
-      const response = await fetch( "http://localhost:3030/weather", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify( {
-          lat,
-          lon
-        } )
-      } );
-    } catch ( err ) {
-      console.log( err );
-    }
-  };
+  //     const response = await fetch( "https://weatherdata-api.vercel.app/weather", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify( {
+  //         lat,
+  //         lon
+  //       } )
+  //     } );
+
+  //     const body = await response.json();
+
+  //     console.log( body );
+
+  //     setData( body[ 0 ] );
+
+  //   } catch ( err ) {
+  //     console.log( err );
+  //   }
+  // };
 
   function capitalizeFirstLetterOfEachWord ( str ) {
     return str.replace( /\b\w/g, char => char.toUpperCase() );
@@ -82,8 +116,8 @@ const Navbar = () => {
             if ( optionValue ) {
 
               const [ lat, lon ] = optionValue.split( ' ' );
-
-              fetchWeatherData( lat, lon );
+              navigate( `?lat=${ lat }&lon=${ lon }&n=${ list?.value }` );
+              // fetchWeatherData( lat, lon );
 
             }
 
@@ -100,6 +134,7 @@ const Navbar = () => {
       <img className={ Styles[ 'weather-bg' ] } id={ Styles[ 'rainy' ] } src="/Imgs/rainy.jpg" alt="rainy" />
       <img className={ Styles[ 'weather-bg' ] } id={ Styles[ 'sunny' ] } src="/Imgs/sunny.png" alt="sunny" />
       <img className={ Styles[ 'weather-bg' ] } id={ Styles[ 'thunderstorm' ] } src="/Imgs/thunderstorm.jpg" alt="thunderstorm" />
+      <img className={ Styles[ 'weather-bg' ] } id={ Styles[ 'smoky' ] } src="/Imgs/smoky.jpg" alt="smoky" />
     </>
   );
 };

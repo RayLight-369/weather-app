@@ -1,0 +1,78 @@
+{
+  "location": {
+    "name": "Lahore, Pakistan",
+    "lat": "31.565",
+    "long": "74.314",
+    "timezone": "0",
+    "alert": "",
+    "degreetype": "C",
+    "imagerelativeurl": "http://blob.weather.microsoft.com/static/weather4/en-us/"
+  },
+  "current": {
+    "temperature": "33",
+    "skycode": "22",
+    "skytext": "Smoke",
+    "date": "2024-07-07",
+    "observationtime": "10:05:00",
+    "observationpoint": "Lahore, Pakistan",
+    "feelslike": "41",
+    "humidity": "64",
+    "winddisplay": "9 km/h Northeast",
+    "day": "Sunday",
+    "shortday": "Sun",
+    "windspeed": "9 km/h",
+    "imageUrl": "http://blob.weather.microsoft.com/static/weather4/en-us/law/22.gif"
+  },
+  "forecast": [
+    {
+      "low": "26",
+      "high": "34",
+      "skycodeday": "34",
+      "skytextday": "Mostly sunny",
+      "date": "2024-07-06",
+      "day": "Saturday",
+      "shortday": "Sat",
+      "precip": "11"
+    },
+    {
+      "low": "28",
+      "high": "34",
+      "skycodeday": "34",
+      "skytextday": "Mostly sunny",
+      "date": "2024-07-07",
+      "day": "Sunday",
+      "shortday": "Sun",
+      "precip": "19"
+    },
+    {
+      "low": "29",
+      "high": "36",
+      "skycodeday": "34",
+      "skytextday": "Mostly sunny",
+      "date": "2024-07-08",
+      "day": "Monday",
+      "shortday": "Mon",
+      "precip": "11"
+    },
+    {
+      "low": "28",
+      "high": "36",
+      "skycodeday": "34",
+      "skytextday": "Mostly sunny",
+      "date": "2024-07-09",
+      "day": "Tuesday",
+      "shortday": "Tue",
+      "precip": "18"
+    },
+    {
+      "low": "27",
+      "high": "36",
+      "skycodeday": "34",
+      "skytextday": "Mostly sunny",
+      "date": "2024-07-10",
+      "day": "Wednesday",
+      "shortday": "Wed",
+      "precip": "32"
+    }
+  ]
+}
